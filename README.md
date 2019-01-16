@@ -1,0 +1,3 @@
+# giftastic
+
+GIPHY API
