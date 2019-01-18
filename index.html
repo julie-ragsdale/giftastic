@@ -4,34 +4,42 @@
         <title>GIFtastic</title>
 
         <!-- Links to CSS -->
-        <link href="assets/css/reset.css"/>
-        <link href="assets/css/style.css"/>
+        <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css"/> -->
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
     </hed>
     <body>
 
         <!-- Header -->
         <header>
             <h1>GIFtastic</h1>
-            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search...">
         </header>
+
+        <form id="search-form">
+            <div class="search">
+                <input type="text" name="search" class="dot" />
+                <input type="submit" class="corner" value="" />
+            </div>
+        </form>
 
         <!-- Button div -->
         <div class="container">
-            <div id="buttons"></div>
+            <div id="button-grid"></div>
         </div>
 
         <div class="container">
+            <div id="image-grid">
 
-        </div>
-
-        <div class="container">
-
+            </div>
         </div>
 
         <!-- Footer -->
-        <footer>Julie Ragsdale | © 2019</footer>
+        <footer>
+            <p id="footer-text">Julie Ragsdale | © 2019</p>
+        </footer>
 
         <!-- Link to JavaScript -->
         <script href="assets/javascript/ajax.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     </body>
 </html>
