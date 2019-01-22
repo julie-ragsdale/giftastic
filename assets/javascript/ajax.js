@@ -27,6 +27,66 @@ $(document).ready(function() {
     ];
     console.log(topics);
 
+    function displayTopicsInfo() {
+        // Refers to the button being clicked
+        var topic = $(this).attr('data-id');
+        var giphyAPI = 'KhYgqTlp6zKKgwSZRM66bvMXcRJIm070';
+        var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=KhYgqTlp6zKKgwSZRM66bvMXcRJIm070&q=' + topic + '&limit=10&lang=en';
+        // AJAX configuration
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).then(function(response) {
+            $('#image-grid').text(JSON.stringify(response));
+        });
+        function renderGifs() {
+            $(document).on('click', '.topic', function(displayTopicsInfo) {
+                
+                $('<button>').text(response.search);
+                // $('#button-grid').html(JSON.stringify(response));
+                // Create new div on the fly 
+                var buttonDiv = $('<div class="topic">');
+                var button = $('<button>').text(response.Search);
+                // Append new buttons to button div
+                button.append(response.Search);
+                buttonDiv.append(button);   
+                
+                // Create GIF on the fly and append to image grid
+                var gifDiv = $('<div class="gifDiv">')
+                var imageURL = response.images.fixed-width;
+                var imageGif = $('<img>');
+                imageGif.attr('src', imageURL);
+                var gifRating = $('<p>').text('Rated: ' + response.rating);
+                $('#image-grid').attr('src', imageURL);
+                gifDiv.append(imageURL);
+                gifDiv.append(gifRating);
+                $('#image-grid').append(gifDiv);
+                
+                // Append rating to each GIF
+                
+                // On click, have GIF animate or be still
+                $('.gif').on('click', function(){
+                    var state = $(this).attr('data-state');
+                    console.log(state);
+                    
+                    // The state acts as a flag to tell you whether image is currently still or animating
+                    if (state === 'still') {
+                        var url = $(this).attr('data-animate');
+                        $(this).attr('src', url);
+                        $(this).attr('data-state', 'animate');
+                    } else {
+                        var url = $(this).attr('data-still');
+                        $(this).attr('src', url);
+                        $(this).attr('data-state', 'animate');
+                    }
+                });    
+            });
+        }
+        renderGifs();
+    }
+    
+    
+    // THIS CODE WORKS
     // Take topics from array and create buttons in HTML
     function renderButtons() {
         // Use a for loop to append a button for each string in the array
@@ -38,19 +98,21 @@ $(document).ready(function() {
             button.text(topic);
             button.css({margin: '15px',
                 position: 'relative',
+                width: '125px',
                 fontSize: '20px',
                 fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sansSerif",
                 backgroundColor: '#333',
                 color: '#fff',
                 border: '2px solid #fff',
+                borderRadius: '15px'
             });
             $('#button-grid').append(button);
         }); 
     }
     renderButtons();
         
-    // Event handler for button click
-    $('#searchbar_add-button').on('click', function(event) {
+    // On click, push user input to topics array
+        $('#searchbar_add-button').on('click', function(event) {
         event.preventDefault();
         var value = $('#searchbar-input').val().trim();
         topics.push(value);
@@ -59,54 +121,6 @@ $(document).ready(function() {
         $('#image-grid').empty();
     });
 
-    function renderGifs() {
-        $(document).on('click', '.topic', function() {
-            // Refers to the button being clicked
-            var topic = $(this).attr(response);
-            var giphyAPI = 'KhYgqTlp6zKKgwSZRM66bvMXcRJIm070';
-            var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=KhYgqTlp6zKKgwSZRM66bvMXcRJIm070&q=' + topic + '&limit=10&lang=en';
-            // AJAX configuration
-            $.ajax({
-                url: queryURL,
-                method: 'GET'
-            }).then(function(response) {
-                console.log(response);
-                var newButton = $('<button>').text(response.search);
-                $('#button-grid').html(JSON.stringify(response));
-                $('#image-grid').attr('src', url);
-            });
-            
-            var rating = $('<p>').text('Rating: ' + response.rating);
-            var image = $('<img>').attr('src', response.images.fixed-width);
-            
-            var buttonDiv = $('<div class = "topic">');
-            var button = $('<button>').text(response.Search);
-            
-            button.append(response.Search);
-            
-            // Under every gif, display its rating (PG, G, so on).
-            buttonDiv.prepend(image, rating);    
-            
-            // On click, have GIF animate or be still
-            $('.gif').on('click', function(){
-                var state = $(this).attr('data-state');
-                console.log(state);
-                
-                // The state acts as a flag to tell you whether image is currently still or animating
-                if (state === 'still') {
-                    var url = $(this).attr('data-animate');
-                    $(this).attr('src', url);
-                    $(this).attr('data-state', 'animate');
-                } else {
-                    var url = $(this).attr('data-still');
-                    $(this).attr('src', url);
-                    $(this).attr('data-state', 'animate');
-                }
-            });    
-        });
-    }
-    renderGifs()
-    
     // Only once you get images displaying with button presses should you move on to the next step.
     
     
