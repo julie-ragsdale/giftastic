@@ -1,11 +1,11 @@
 body {
     background-image: url(../images/bananas.png);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-
+    margin-top: 250px;
+    color: #333;
 }
 
 header {
-    color: #333;
     position: fixed;
     width: 100%;
     top: 0;
@@ -18,44 +18,53 @@ h1 {
     font-size: 100px;
 }
 
+.main-content,
 .container {
     position: relative;
     width: 100%;
+    margin-top: 25px;
+    border: 0.5px solid #888;
+    text-align: center;
+}
+
+.main-content {
+    border: none;
+}
+
+#form-search {
+    position: relative;
+    margin: 0 auto;
+    width: 200px;
+}
+
+#searchbar-input {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 5px;
+    z-index: 5;
+    border-radius: 15px;
+    border: 1px #888 solid;
+    color: #333;
+    padding: 5px 5px 5px 25px;
+}
+
+#searchbar_add-button {
+    position: absolute;
+    width: 27px;
+    height: 27px;
+    left: 0;
+    z-index: 10;
+    border-radius: 15px;
+    border: none;
+    background: #333;
+    color: #fff;
 }
 
 #button-grid {
     position: relative;
     width: 100%;
-}
-
-#form-search {
-    position: relative;
-    width: 200px;
-}
-
-#button-input {
-    width: 100%;
-    border-radius: 15px;
-    border: 1px #666 solid;
-    color: #333;
-    padding: 5px 5px 5px 25px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 5;
-}
-
-#button-add {
-    position: absolute;
-    top: 3px;
-    left: 5px;
-    height: 20px;
-    width: 20px;
-    z-index: 10;
-    border-radius: 10px;
-    border: none;
-    background: #333;
-    color: #fff;
+    text-align: center;
 }
 
 .button {
@@ -70,6 +79,7 @@ h1 {
 #image-grid {
     position: relative;
     width: 100%;
+    text-align: center;
 }
 
 footer {
@@ -83,7 +93,6 @@ footer {
 
 #footer-text {
     text-align: center;
-
 }
 
 /* Media Queries */

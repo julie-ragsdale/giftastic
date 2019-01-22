@@ -16,19 +16,26 @@
         
 
         <!-- Main Content -->
-        <div class="container">
+        <div class="container main-content">
+            <form id="form-search">
+                <label for="searchbar-input">Add topic</label>
+                <input id="searchbar-input" type="text" name="search">
+                <input id="searchbar_add-button" type="submit" value="+">
+            </form>
 
-            <!-- Buttons will be added here -->
-            <div id="button-grid">
-                <form id="form-search">
-                    <label for="button-input">Add topic</label>
-                    <input id="button-input" type="text" name="search">
-                    <input id="button-add" type="submit" value="+">
-                </form>
+            <div class="container row">
+                <h2>Click us!</h2>
+                <di id="button-grid" class="col-md-12">
+                    <!-- Buttons will be added here -->
+                </di>
             </div>
 
-            <!-- GIFs will be displayed here -->
-            <div id="image-grid"></div>
+            <div class="container row">
+                <h2>GIFs</h2>
+                <div id="image-grid" class="col-md-12">
+                    <!-- GIFs will be displayed here -->
+                </div>
+            </div>
 
         </div>
 
@@ -38,8 +45,8 @@
         </footer>
 
         <!-- Link to JavaScript -->
-        <script href="assets/javascript/ajax.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="assets/javascript/ajax.js" type="text/javascript"></script>
 
     </body>
 </html>
