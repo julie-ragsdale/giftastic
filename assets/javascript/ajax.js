@@ -16,14 +16,11 @@ $(document).ready(function() {
         'fox',
         'raccoon'
     ];
-    console.log(topics);
     
     $(document).on('click', '.topic', function() {
-        // Refers to the button being clicked
         var topic = $(this).attr('data-id');
         var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=KhYgqTlp6zKKgwSZRM66bvMXcRJIm070&q=' + topic + '&limit=10&lang=en';
         
-        // AJAX configuration
         $.ajax({
             url: queryURL,
             method: 'GET'
@@ -36,11 +33,16 @@ $(document).ready(function() {
             // Loop through all topics in array
             for (i = 0; i < topics.length; i ++) {
                 var imageUrl = response.data[i].images.original_still.url;
-                var stillUrl = response.data[i].images.original_still.url
-                var animateUrl = response.data[i].images.original.url
+                var stillUrl = response.data[i].images.original_still.url;
+                var animateUrl = response.data[i].images.original.url;
                 var imageGif = $('<img>');
+                var gifTitle = $('<p>').text('Title: ' + response.data[i].title);
                 var gifRating = $('<p>').text('Rated: ' + response.data[i].rating);
-                var gifDiv = $('<div class="gif clearfix" style="float:left">')
+                var gifDiv = $('<div class="gif clearfix" style="float:left">');
+
+                // Looks as if this line is grabbing the correct URL, but I am getting an error about missing a closing parenthesis
+                var dlBtn = $('<button type="submit" onclick="window.open(' + imageUrl + ')">').text('Download!');
+                
                 imageGif.attr('src', imageUrl);
                 imageGif.attr('data-still', stillUrl);
                 imageGif.attr('data-animate', animateUrl);
@@ -49,12 +51,23 @@ $(document).ready(function() {
                     border: '2px solid #fff',
                     borderRadius: '25px',
                     margin: '15px',
-                })
+                });
+                gifTitle.css({
+                    color: '#333',
+                    fontSize: '24px'
+                });
+                dlBtn.css({
+                    backgroundColor: '#fc766a',
+                    color: '#fff',
+                    fontFamily: '',
+                    fontSize: '20px',
+                    border: '2px solid #fff',
+                    borderRadius: '25px',
+                });
                 gifDiv.append(imageGif);
+                gifDiv.append(gifTitle);
                 gifDiv.append(gifRating);
-                gifDiv.css({
-
-                })
+                gifDiv.append(dlBtn);
                 $('#image-grid').append(gifDiv);
             }
         });
