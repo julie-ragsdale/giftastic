@@ -27,65 +27,54 @@ $(document).ready(function() {
     ];
     console.log(topics);
 
-    function displayTopicsInfo() {
+    var giphyAPI = 'KhYgqTlp6zKKgwSZRM66bvMXcRJIm070';
+
+    $(document).on('click', '.topic', function() {
         // Refers to the button being clicked
         var topic = $(this).attr('data-id');
-        var giphyAPI = 'KhYgqTlp6zKKgwSZRM66bvMXcRJIm070';
         var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=KhYgqTlp6zKKgwSZRM66bvMXcRJIm070&q=' + topic + '&limit=10&lang=en';
+        
         // AJAX configuration
         $.ajax({
             url: queryURL,
             method: 'GET'
         }).then(function(response) {
-            $('#image-grid').text(JSON.stringify(response));
-        });
-        function renderGifs() {
-            $(document).on('click', '.topic', function(displayTopicsInfo) {
-                
-                $('<button>').text(response.search);
-                // $('#button-grid').html(JSON.stringify(response));
-                // Create new div on the fly 
-                var buttonDiv = $('<div class="topic">');
-                var button = $('<button>').text(response.Search);
-                // Append new buttons to button div
-                button.append(response.Search);
-                buttonDiv.append(button);   
-                
-                // Create GIF on the fly and append to image grid
+            $('<button>').text(response.search);
+            var button = $('<button>').text(response.Search);
+            button.append(response.Search);
+
+            // Loop through all topics in array
+            for (i = 0; i < topics.length; i ++) {
+                var imageURL = response.data[i].images.fixed_width.url;
+                var gifRating = $('<p>').text('Rated: ' + response.data[i].rating);
                 var gifDiv = $('<div class="gifDiv">')
-                var imageURL = response.images.fixed-width;
                 var imageGif = $('<img>');
                 imageGif.attr('src', imageURL);
-                var gifRating = $('<p>').text('Rated: ' + response.rating);
-                $('#image-grid').attr('src', imageURL);
-                gifDiv.append(imageURL);
+                gifDiv.append(imageGif);
                 gifDiv.append(gifRating);
                 $('#image-grid').append(gifDiv);
-                
-                // Append rating to each GIF
-                
-                // On click, have GIF animate or be still
-                $('.gif').on('click', function(){
-                    var state = $(this).attr('data-state');
-                    console.log(state);
+            }
+        });
                     
-                    // The state acts as a flag to tell you whether image is currently still or animating
-                    if (state === 'still') {
-                        var url = $(this).attr('data-animate');
-                        $(this).attr('src', url);
-                        $(this).attr('data-state', 'animate');
-                    } else {
-                        var url = $(this).attr('data-still');
-                        $(this).attr('src', url);
-                        $(this).attr('data-state', 'animate');
-                    }
-                });    
-            });
-        }
-        renderGifs();
-    }
+        // On click, have GIF animate or be still
+        $('.gif').on('click', function(){
+            var state = $(this).attr('data-state');
+            console.log(state);
+            
+            // The state acts as a flag to tell you whether image is currently still or animating
+            if (state === 'still') {
+                var url = $(this).attr('data-animate');
+                $(this).attr('src', url);
+                $(this).attr('data-state', 'animate');
+            } else {
+                var url = $(this).attr('data-still');
+                $(this).attr('src', url);
+                $(this).attr('data-state', 'animate');
+            }
+        });    
+    });
     
-    
+
     // THIS CODE WORKS
     // Take topics from array and create buttons in HTML
     function renderButtons() {
@@ -112,7 +101,7 @@ $(document).ready(function() {
     renderButtons();
         
     // On click, push user input to topics array
-        $('#searchbar_add-button').on('click', function(event) {
+    $('#searchbar_add-button').on('click', function(event) {
         event.preventDefault();
         var value = $('#searchbar-input').val().trim();
         topics.push(value);
