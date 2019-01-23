@@ -75,6 +75,12 @@ h1 {
     margin: 0 auto;
 }
 
+/* Should change the color of the download button on hover */
+button[type="submit"]:hover {
+    background-color: #ffbfba;
+    color: #333;
+}
+
 .clearfix::after {
     content: "";
     clear: both;
