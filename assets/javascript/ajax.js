@@ -6,24 +6,17 @@ $(document).ready(function() {
     console.log("Document ready");
     // Array of search terms
     var topics = [
-        'puppy',
-        'kitten',
-        'coffee',
-        'latte',
-        'espresso',
-        'watercolor',
-        'art',
-        'plants',
-        'houseplant',
-        'coding',
-        'science',
-        'botany',
-        'overcast',
-        'cozy',
+        'red panda',
         'dog',
         'cat',
-        'embroidery',
-        'sewing'
+        'bearded dragon',
+        'husky',
+        'guinea pig',
+        'parakeet',
+        'hamster',
+        'bunny',
+        'fox',
+        'raccoon'
     ];
     console.log(topics);
 
@@ -42,10 +35,11 @@ $(document).ready(function() {
             $('<button>').text(response.search);
             var button = $('<button>').text(response.Search);
             button.append(response.Search);
+            $('#image-grid').empty();
 
             // Loop through all topics in array
             for (i = 0; i < topics.length; i ++) {
-                var imageURL = response.data[i].images.fixed_width.url;
+                var imageURL = response.data[i].images.fixed_width_still.url;
                 var gifRating = $('<p>').text('Rated: ' + response.data[i].rating);
                 var gifDiv = $('<div class="gifDiv">')
                 var imageGif = $('<img>');
@@ -61,7 +55,8 @@ $(document).ready(function() {
             var state = $(this).attr('data-state');
             console.log(state);
             
-            // The state acts as a flag to tell you whether image is currently still or animating
+            // animate: response.data[i].images.fixed_width
+            // still: response.data[i].images.fixed_width_still.url
             if (state === 'still') {
                 var url = $(this).attr('data-animate');
                 $(this).attr('src', url);
@@ -74,11 +69,8 @@ $(document).ready(function() {
         });    
     });
     
-
-    // THIS CODE WORKS
-    // Take topics from array and create buttons in HTML
+    // Loop through array to create a button for each topic
     function renderButtons() {
-        // Use a for loop to append a button for each string in the array
         $('#button-grid').empty();
         topics.forEach(function(topic) {
             var button = $('<button>');
@@ -87,13 +79,14 @@ $(document).ready(function() {
             button.text(topic);
             button.css({margin: '15px',
                 position: 'relative',
-                width: '125px',
+                width: '200px',
+                height: '50px',
                 fontSize: '20px',
                 fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sansSerif",
                 backgroundColor: '#333',
                 color: '#fff',
                 border: '2px solid #fff',
-                borderRadius: '15px'
+                borderRadius: '25px'
             });
             $('#button-grid').append(button);
         }); 

@@ -6,7 +6,7 @@ body {
 }
 
 header {
-    position: fixed;
+    position: absolute;
     width: 100%;
     top: 0;
     left: 0;
@@ -18,17 +18,11 @@ h1 {
     font-size: 100px;
 }
 
-.main-content,
 .container {
     position: relative;
     width: 100%;
     margin-top: 25px;
-    border: 0.5px solid #888;
     text-align: center;
-}
-
-.main-content {
-    border: none;
 }
 
 #form-search {
@@ -82,8 +76,13 @@ h1 {
     text-align: center;
 }
 
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 footer {
-    color: #333;
     position: fixed;
     width: 100%;
     left: 0;
@@ -92,6 +91,7 @@ footer {
 }
 
 #footer-text {
+    color: #333;
     text-align: center;
 }
 
