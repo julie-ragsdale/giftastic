@@ -69,12 +69,10 @@ h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
 }
-
+/* 
 #image-grid {
-    position: relative;
-    width: 100%;
-    text-align: center;
-}
+    margin: 0 auto;
+} */
 
 .clearfix::after {
     content: "";

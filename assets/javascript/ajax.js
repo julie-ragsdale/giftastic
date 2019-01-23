@@ -1,6 +1,4 @@
-// q - search query term or phrase 
-// limit - (optional) number of results to return, maximum 100. Default 25.
-// rating - limit results to those rated (y,g, pg, pg-13 or r).
+// Giphy API key = KhYgqTlp6zKKgwSZRM66bvMXcRJIm070
 
 $(document).ready(function() {
     console.log("Document ready");
@@ -19,9 +17,7 @@ $(document).ready(function() {
         'raccoon'
     ];
     console.log(topics);
-
-    var giphyAPI = 'KhYgqTlp6zKKgwSZRM66bvMXcRJIm070';
-
+    
     $(document).on('click', '.topic', function() {
         // Refers to the button being clicked
         var topic = $(this).attr('data-id');
@@ -39,35 +35,38 @@ $(document).ready(function() {
 
             // Loop through all topics in array
             for (i = 0; i < topics.length; i ++) {
-                var imageURL = response.data[i].images.fixed_width_still.url;
-                var gifRating = $('<p>').text('Rated: ' + response.data[i].rating);
-                var gifDiv = $('<div class="gifDiv">')
+                var imageUrl = response.data[i].images.fixed_width_still.url;
+                var stillUrl = response.data[i].images.fixed_width_still.url
+                var animateUrl = response.data[i].images.fixed_width.url
                 var imageGif = $('<img>');
-                imageGif.attr('src', imageURL);
+                var gifRating = $('<p>').text('Rated: ' + response.data[i].rating);
+                var gifDiv = $('<div class="gif clearfix" style="float:left">')
+                imageGif.attr('src', imageUrl);
+                imageGif.attr('data-still', stillUrl);
+                imageGif.attr('data-animate', animateUrl);
+                imageGif.attr('data-state', 'still');
                 gifDiv.append(imageGif);
                 gifDiv.append(gifRating);
                 $('#image-grid').append(gifDiv);
             }
         });
-                    
-        // On click, have GIF animate or be still
-        $('.gif').on('click', function(){
-            var state = $(this).attr('data-state');
-            console.log(state);
-            
-            // animate: response.data[i].images.fixed_width
-            // still: response.data[i].images.fixed_width_still.url
-            if (state === 'still') {
-                var url = $(this).attr('data-animate');
-                $(this).attr('src', url);
-                $(this).attr('data-state', 'animate');
-            } else {
-                var url = $(this).attr('data-still');
-                $(this).attr('src', url);
-                $(this).attr('data-state', 'animate');
-            }
-        });    
+    });   
+
+    // On click, have GIF animate or be still
+    $('#image-grid').on('click', 'img', function(){
+        var state = $(this).attr('data-state');
+        console.log(state);
+        if (state === 'still') {
+            var url = $(this).attr('data-still');
+            $(this).attr('src', url);
+            $(this).attr('data-state', 'animate');
+        } else {
+            var url = $(this).attr('data-animate');
+            $(this).attr('src', url);
+            $(this).attr('data-state', 'still');
+        }
     });
+                    
     
     // Loop through array to create a button for each topic
     function renderButtons() {
@@ -102,12 +101,6 @@ $(document).ready(function() {
         $('#searchbar-input').val('');
         $('#image-grid').empty();
     });
-
-    // Only once you get images displaying with button presses should you move on to the next step.
-    
-    
-    // Add a form to your page takes the value from a user input box and adds it into your topics array. Then make a function call that takes each topic in the array remakes the buttons on the page.
-    
 });
 
 // * * B O N U S * *
