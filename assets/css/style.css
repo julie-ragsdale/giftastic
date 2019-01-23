@@ -70,9 +70,22 @@ h1 {
     position: relative;
 }
 
-#image-grid {
+/* This is the container div holding all of the images */
+.gallery {
     width: 100%;
     margin: 0 auto;
+}
+
+/* This is the div holding an individual image */
+.gallery-item {
+
+}
+
+/* This is the image */
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Should change the color of the download button on hover */

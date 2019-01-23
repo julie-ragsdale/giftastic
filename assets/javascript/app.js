@@ -28,17 +28,18 @@ $(document).ready(function() {
             $('<button>').text(response.search);
             var button = $('<button>').text(response.Search);
             button.append(response.Search);
-            $('#image-grid').empty();
+            $('.gallery').empty();
 
             // Loop through all topics in array
             for (i = 0; i < topics.length; i ++) {
                 var imageUrl = response.data[i].images.original_still.url;
                 var stillUrl = response.data[i].images.original_still.url;
                 var animateUrl = response.data[i].images.original.url;
+                var galleryHeader = $('.gallery-header').css({visibility: 'visible'});
                 var imageGif = $('<img>');
                 var gifTitle = $('<p>').text('Title: ' + response.data[i].title);
                 var gifRating = $('<p>').text('Rated: ' + response.data[i].rating);
-                var gifDiv = $('<div class="gif clearfix" style="float:left">');
+                var imageFigure = $('<figure class="gallery_item clearfix" style="float:left">');
 
                 // Looks as if this line is grabbing the correct URL, but I am getting an error about missing a closing parenthesis
                 var dlBtn = $('<button type="submit" onclick="window.open(' + imageUrl + ')">').text('Download!');
@@ -64,17 +65,18 @@ $(document).ready(function() {
                     border: '2px solid #fff',
                     borderRadius: '25px',
                 });
-                gifDiv.append(imageGif);
-                gifDiv.append(gifTitle);
-                gifDiv.append(gifRating);
-                gifDiv.append(dlBtn);
-                $('#image-grid').append(gifDiv);
+                imageFigure.append(imageGif);
+                imageFigure.append(gifTitle);
+                imageFigure.append(gifRating);
+                imageFigure.append(dlBtn);
+                $('.gallery').append(imageFigure);
+
             }
         });
     });   
 
     // On click, have GIF animate or be still
-    $('#image-grid').on('click', 'img', function(){
+    $('.gallery').on('click', 'img', function(){
         var state = $(this).attr('data-state');
         if (state === 'still') {
             var url = $(this).attr('data-animate');
@@ -118,7 +120,7 @@ $(document).ready(function() {
         topics.push(value);
         renderButtons();
         $('#searchbar-input').val('');
-        $('#image-grid').empty();
+        $('.gallery').empty();
     });
 });
 
