@@ -35,9 +35,9 @@ $(document).ready(function() {
 
             // Loop through all topics in array
             for (i = 0; i < topics.length; i ++) {
-                var imageUrl = response.data[i].images.fixed_width_still.url;
-                var stillUrl = response.data[i].images.fixed_width_still.url
-                var animateUrl = response.data[i].images.fixed_width.url
+                var imageUrl = response.data[i].images.original_still.url;
+                var stillUrl = response.data[i].images.original_still.url
+                var animateUrl = response.data[i].images.original.url
                 var imageGif = $('<img>');
                 var gifRating = $('<p>').text('Rated: ' + response.data[i].rating);
                 var gifDiv = $('<div class="gif clearfix" style="float:left">')
@@ -45,8 +45,16 @@ $(document).ready(function() {
                 imageGif.attr('data-still', stillUrl);
                 imageGif.attr('data-animate', animateUrl);
                 imageGif.attr('data-state', 'still');
+                imageGif.css({
+                    border: '2px solid #fff',
+                    borderRadius: '25px',
+                    margin: '15px',
+                })
                 gifDiv.append(imageGif);
                 gifDiv.append(gifRating);
+                gifDiv.css({
+
+                })
                 $('#image-grid').append(gifDiv);
             }
         });
@@ -55,18 +63,16 @@ $(document).ready(function() {
     // On click, have GIF animate or be still
     $('#image-grid').on('click', 'img', function(){
         var state = $(this).attr('data-state');
-        console.log(state);
         if (state === 'still') {
-            var url = $(this).attr('data-still');
+            var url = $(this).attr('data-animate');
             $(this).attr('src', url);
             $(this).attr('data-state', 'animate');
         } else {
-            var url = $(this).attr('data-animate');
+            var url = $(this).attr('data-still');
             $(this).attr('src', url);
             $(this).attr('data-state', 'still');
         }
-    });
-                    
+    });                    
     
     // Loop through array to create a button for each topic
     function renderButtons() {
