@@ -20,7 +20,7 @@ $(document).ready(function() {
     $(document).on('click', '.topic', function() {
         var topic = $(this).attr('data-id');
         var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=KhYgqTlp6zKKgwSZRM66bvMXcRJIm070&q=' + topic + '&limit=10&lang=en';
-        
+
         $.ajax({
             url: queryURL,
             method: 'GET'
@@ -30,28 +30,43 @@ $(document).ready(function() {
             button.append(response.Search);
             $('.gallery').empty();
 
+            // This is my gallery grid
+            // $('').append(gifDiv); // Row 1 Col 1
+            // $('').append(gifDiv); // Row 1 Col 2
+            // $('').append(gifDiv); // Row 1 Col 3
+            // $('').append(gifDiv); // Row 1 Col 4
+            // $('').append(gifDiv); // Row 1 Col 5
+
+            // $('').append(gifDiv); // Row 2 Col 1
+            // $('').append(gifDiv); // Row 2 Col 2
+            // $('').append(gifDiv); // Row 2 Col 3
+            // $('').append(gifDiv); // Row 2 Col 4
+            // $('').append(gifDiv); // Row 2 Col 5
+
             // Loop through all topics in array
-            for (i = 0; i < topics.length; i ++) {
+            for (i = 0; i < response.data.length; i ++) {
                 var imageUrl = response.data[i].images.original_still.url;
                 var stillUrl = response.data[i].images.original_still.url;
                 var animateUrl = response.data[i].images.original.url;
-                var galleryHeader = $('.gallery-header').css({visibility: 'visible'});
-                var imageGif = $('<img>');
+                var gif = $('<img>');
                 var gifTitle = $('<p>').text('Title: ' + response.data[i].title);
                 var gifRating = $('<p>').text('Rated: ' + response.data[i].rating);
-                var imageFigure = $('<figure class="gallery_item clearfix" style="float:left">');
-
+                var gifDiv = $('<div class="gallery-item clearfix">');
+                
                 // Looks as if this line is grabbing the correct URL, but I am getting an error about missing a closing parenthesis
                 var dlBtn = $('<button type="submit" onclick="window.open(' + imageUrl + ')">').text('Download!');
                 
-                imageGif.attr('src', imageUrl);
-                imageGif.attr('data-still', stillUrl);
-                imageGif.attr('data-animate', animateUrl);
-                imageGif.attr('data-state', 'still');
-                imageGif.css({
+                $('.gallery-header').css({visibility: 'visible'});
+                gif.attr('src', imageUrl);
+                gif.attr('data-still', stillUrl);
+                gif.attr('data-animate', animateUrl);
+                gif.attr('data-state', 'still');
+                gif.css({
                     border: '2px solid #fff',
                     borderRadius: '25px',
                     margin: '15px',
+                    maxWidth: '200px',
+                    float: 'left'
                 });
                 gifTitle.css({
                     color: '#333',
@@ -65,16 +80,26 @@ $(document).ready(function() {
                     border: '2px solid #fff',
                     borderRadius: '25px',
                 });
-                imageFigure.append(imageGif);
-                imageFigure.append(gifTitle);
-                imageFigure.append(gifRating);
-                imageFigure.append(dlBtn);
-                $('.gallery').append(imageFigure);
+                gifDiv.append(gif);
+                gifDiv.append(gifTitle);
+                gifDiv.append(gifRating);
+                gifDiv.append(dlBtn);
+                // $('.gallery').append(gifDiv);
+                $('.gallery-item').css({
+                    width: '200px',
+                    float: 'left',
+                    margin: '15px',
+                });
 
+                if (i <= 5) {
+                    $('#gallery_row-1').append(gifDiv);
+                } else {
+                    $('#gallery_row-2').append(gifDiv);
+                }
             }
         });
     });   
-
+    
     // On click, have GIF animate or be still
     $('.gallery').on('click', 'img', function(){
         var state = $(this).attr('data-state');
@@ -87,6 +112,7 @@ $(document).ready(function() {
             $(this).attr('src', url);
             $(this).attr('data-state', 'still');
         }
+        console.log("hello");
     });                    
     
     // Loop through array to create a button for each topic
