@@ -64,7 +64,6 @@ $(document).ready(function() {
                 gif.css({
                     border: '2px solid #fff',
                     borderRadius: '25px',
-                    margin: '15px',
                     maxWidth: '200px',
                     float: 'left'
                 });
@@ -86,15 +85,21 @@ $(document).ready(function() {
                 gifDiv.append(dlBtn);
                 // $('.gallery').append(gifDiv);
                 $('.gallery-item').css({
-                    width: '200px',
+                    maxWidth: '200px',
                     float: 'left',
-                    margin: '15px',
+                    margin: '25px',
                 });
 
-                if (i <= 5) {
+                if (i <= 4) {
                     $('#gallery_row-1').append(gifDiv);
-                } else {
+                
+                // The next four gifs (5 through 8) should be appended to the second row 
+                } else if ( 4 < i < 9) {
                     $('#gallery_row-2').append(gifDiv);
+
+                // The last two gifs should be appended to the third row - Unsure of why they are not
+                } else {
+                    $('#gallery_row-3').append(gifDiv);
                 }
             }
         });
