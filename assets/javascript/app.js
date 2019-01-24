@@ -1,8 +1,7 @@
 // Giphy API key = KhYgqTlp6zKKgwSZRM66bvMXcRJIm070
 
 $(document).ready(function() {
-    console.log("Document ready");
-    // Array of search terms
+
     var topics = [
         'red panda',
         'dog',
@@ -30,6 +29,8 @@ $(document).ready(function() {
             button.append(response.Search);
             $('.gallery').empty();
 
+        // Ignore - I plan on using a modulo to create a grid that will place items from the array into the grid based on their index
+        //  Will use modulo because the grid will have multiple rows, so finding the remainder will serve as an identifier in a two dimensional array
             // This is my gallery grid
             // $('').append(gifDiv); // Row 1 Col 1
             // $('').append(gifDiv); // Row 1 Col 2
@@ -83,13 +84,13 @@ $(document).ready(function() {
                 gifDiv.append(gifTitle);
                 gifDiv.append(gifRating);
                 gifDiv.append(dlBtn);
-                // $('.gallery').append(gifDiv);
                 $('.gallery-item').css({
                     maxWidth: '200px',
                     float: 'left',
                     margin: '25px',
                 });
 
+                // Append items to respective rows
                 if (i <= 4) {
                     $('#gallery_row-1').append(gifDiv);
                 
@@ -105,7 +106,7 @@ $(document).ready(function() {
         });
     });   
     
-    // On click, have GIF animate or be still
+    // On click, have the gif animate or be still
     $('.gallery').on('click', 'img', function(){
         var state = $(this).attr('data-state');
         if (state === 'still') {
@@ -117,10 +118,9 @@ $(document).ready(function() {
             $(this).attr('src', url);
             $(this).attr('data-state', 'still');
         }
-        console.log("hello");
     });                    
     
-    // Loop through array to create a button for each topic
+    // Loop through the array to create a button for each topic
     function renderButtons() {
         $('#button-grid').empty();
         topics.forEach(function(topic) {
@@ -144,7 +144,7 @@ $(document).ready(function() {
     }
     renderButtons();
         
-    // On click, push user input to topics array
+    // On click, push user input into the topics array
     $('#searchbar_add-button').on('click', function(event) {
         event.preventDefault();
         var value = $('#searchbar-input').val().trim();
@@ -154,20 +154,3 @@ $(document).ready(function() {
         $('.gallery').empty();
     });
 });
-
-// * * B O N U S * *
-
-// *Ensure your app is fully mobile responsive.
-
-// Allow users to request additional gifs to be added to the page.
-    // Each request should ADD 10 gifs to the page, NOT overwrite the existing gifs.
-
-// List additional metadata (title, tags, etc) for each gif in a clean and readable format.
-
-// Include a 1-click download button for each gif, this should work across device types.
-
-// Integrate this search with additional APIs such as OMDB, or Bands in Town. Be creative and build something you are proud to showcase in your portfolio
-
-// Allow users to add their favorite gifs to a favorites section.
-    // This should persist even when they select or add a new topic.
-    // If you are looking for a major challenge, look into making this section persist even when the page is reloaded(via localStorage or cookies).

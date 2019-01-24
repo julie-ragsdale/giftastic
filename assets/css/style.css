@@ -82,13 +82,6 @@ h2 {
     margin: 0 auto;
 }
 
-/* This is the image
-.gallery-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-} */
-
 /* Should change the color of the download button on hover */
 button[type="submit"]:hover {
     background-color: #ffbfba;
