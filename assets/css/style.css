@@ -1,82 +1,71 @@
 body {
-    background-image: url(../images/bananas.png);
-    margin-top: 200px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
+    color: #fff;
+    background: #111;
 }
 
-header {
-    position: absolute;
-    width: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.wrapper > div {
+    background: #111;
+    padding: 1em;
+}
+
+.wrapper > div:nth-child(odd) {
+    background: #333;
+    padding: 1em;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
 }
 
 h1 {
-    text-align: center;
-    font-size: 125px;
-}
-
-h2 {
-    text-align: center;
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.container {
-    position: relative;
-    width: 100%;
-    margin-top: 25px;
-    text-align: center;
-    float: both;
+    font-size: 50px;
+    padding: 24px;
 }
 
 #form-search {
-    position: relative;
-    margin: 0 auto;
-    width: 200px;
-    font-size: 22px;
+    margin: 12px auto;
+    height: 50px;
+    font-size: 20px;
 }
 
-#searchbar-input {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 5;
-    border-radius: 25px;
+.inputField {
+    border-radius: 5px;
     border: 1px #888 solid;
     color: #333;
-    padding: 5px 5px 5px 25px;
+    padding: 5px;
 }
 
 #searchbar_add-button {
-    position: absolute;
-    width: 45px;
-    height: 45px;
+    padding: 6px 12px;
     right: 0px;
     z-index: 10;
-    border-radius: 25px;
+    border-radius: 5px;
     border: none;
+    cursor: pointer;
 }
 
 #button-grid {
-    position: relative;
     width: 100%;
-    text-align: center;
 }
 
 .button {
     background-color: #333;
     color: #fff;
-    border: 2px solid #fff;
-    font-size: 18px;
+    border: 1px solid #fff;
+    font-size: 16px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
+    cursor: pointer;
 }
 
-/* This is the container div holding all of the images */
+/* This is the container holding all of the images */
 .gallery {
     width: 100%;
     margin: 0 auto;
@@ -84,14 +73,8 @@ h2 {
 
 /* Should change the color of the download button on hover */
 button[type="submit"]:hover {
-    background-color: #ffbfba;
-    color: #333;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
+    background-color: #666;
+    color: #fff;
 }
 
 footer {

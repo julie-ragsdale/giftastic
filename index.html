@@ -9,45 +9,23 @@
         <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
     </head>
     <body>
-
-        <!-- Header -->
         <header>
             <h1>GIFtastic</h1>
         </header>
-
-        <!-- Main Content -->
-        <div class="container main-content">
-            <form id="form-search">
-                <label for="searchbar-input">Add topic</label>
-                <input id="searchbar-input" type="text" name="search">
-                <input id="searchbar_add-button" type="image" src="https://www.shareicon.net/download/2015/12/11/203310_find_512x512.png"></input>
-            </form>
-
-            <div class="container row">
-                <h2>Click the buttons to see relvant gifs!</h2>
-                <div id="button-grid">
-                    <!-- Buttons will be added here -->
-                </div>
+        <main class="wrapper">
+            <div id="menu">
+                <form id="form-search">
+                    <input id="searchbar" class="inputField" type="text" name="search">
+                    <button id="searchbar_add-button">Add</button>
+                </form>
+                <div id="button-grid"></div>
             </div>
-
-            <div class="container row">
-                <h2 class="gallery-header" style="visibility:hidden">Click a gif to animate it!</h2>
-                
-                <!-- The first 4 gifs will be displayed here -->
-                <div id="gallery_row-1" class="gallery clearfix">
-                </div>
-                
-                <!-- The next 4 gifs will be displayed here -->
-                <div id="gallery_row-2" class="gallery clearfix">
-                </div>
-
-                <!-- The last 2 gifs will be displayed here -->
-                <div id="gallery_row-3" class="gallery clearfix">
-                </div>
+            <div>
+                <h2 id="selectTheme">Select a theme to get started!</h2>
+                <h2 id="clickGif" class="gallery-header" style="visibility:hidden">Click a gif to animate it!</h2>
+                <div class="grid"></div>
             </div>
-        </div>
-
-        <!-- Footer -->
+        </main>
         <footer>
             <p id="footer-text">Julie Ragsdale | © 2019</p>
         </footer>
